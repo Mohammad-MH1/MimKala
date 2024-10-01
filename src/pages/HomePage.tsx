@@ -1,5 +1,5 @@
 function HomePage() {
-  return <div className='w-full bg-slate-400'>homepage</div>;
+  return <div>homepage</div>;
 }
 
 export default HomePage;

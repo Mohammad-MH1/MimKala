@@ -4,10 +4,10 @@ import SideBar from './SideBar';
 
 function AppLayout() {
   return (
-    <div className='grid h-dvh grid-cols-[12rem_1fr] grid-rows-[auto_1fr]'>
+    <div className='grid h-dvh grid-cols-[15rem_1fr] grid-rows-[auto_1fr]'>
       <Header />
       <SideBar />
-      <main>
+      <main className='bg-slate-100'>
         <Outlet />
       </main>
     </div>
