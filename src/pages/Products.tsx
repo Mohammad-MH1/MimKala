@@ -68,19 +68,21 @@ function Products() {
             ))}
           </ul>
           <div className='mt-14'>
-            <ReactPaginate
-              breakLabel='...'
-              nextLabel='next >'
-              pageRangeDisplayed={1}
-              pageCount={4}
-              onPageChange={handlePageClick}
-              previousLabel='< previous'
-              renderOnZeroPageCount={null}
-              className='flex items-center justify-center gap-10'
-              nextLinkClassName='button focus:ring-0 focus:ring-offset-0'
-              previousLinkClassName='button focus:ring-0 focus:ring-offset-0'
-              activeClassName='button py-2 px-4'
-            />
+            {products.length > 0 && (
+              <ReactPaginate
+                breakLabel='...'
+                nextLabel='next >'
+                pageRangeDisplayed={1}
+                pageCount={4}
+                onPageChange={handlePageClick}
+                previousLabel='< previous'
+                renderOnZeroPageCount={null}
+                className='flex items-center justify-center gap-10'
+                nextLinkClassName='button focus:ring-0 focus:ring-offset-0'
+                previousLinkClassName='button focus:ring-0 focus:ring-offset-0'
+                activeClassName='button py-2 px-4'
+              />
+            )}
           </div>
         </>
       )}
