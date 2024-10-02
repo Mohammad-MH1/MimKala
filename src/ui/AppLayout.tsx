@@ -1,6 +1,7 @@
 import { Outlet } from 'react-router-dom';
 import Header from './Header';
 import SideBar from './SideBar';
+import Pagination from './Pagination';
 
 function AppLayout() {
   return (
@@ -9,6 +10,7 @@ function AppLayout() {
       <SideBar />
       <main className='overflow-scroll bg-slate-100 p-5'>
         <Outlet />
+        <Pagination />
       </main>
     </div>
   );
