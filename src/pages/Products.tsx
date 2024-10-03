@@ -13,9 +13,10 @@ function Products() {
     error,
     numProducts,
     currentPage,
+    selectedProduct,
+    setSelectedProduct,
   ] = useOutletContext();
   const pageCount = Math.ceil(numProducts / 10);
-  console.log(pageCount);
 
   return (
     <section>

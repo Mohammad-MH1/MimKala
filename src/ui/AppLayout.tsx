@@ -4,7 +4,7 @@ import SideBar from './SideBar';
 import { useEffect, useState } from 'react';
 import { getProducts } from '../services/productsApi';
 
-type Product = {
+export type Product = {
   id: number;
   title: string;
   price: number;
@@ -23,6 +23,7 @@ type Product = {
 
 function AppLayout() {
   const [products, setProducts] = useState<Product[]>([]);
+  const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState('');
   const [selectedCategory, setSelectedCategory] = useState('');
@@ -35,8 +36,6 @@ function AppLayout() {
     categoryID: '',
     price: '',
   });
-
-  console.log(numProducts);
 
   async function fetchProducts() {
     try {
@@ -103,14 +102,26 @@ function AppLayout() {
   }
 
   return (
-    <div className='grid h-dvh grid-cols-[10rem_1fr] grid-rows-[auto_1fr]'>
-      <Header onResetFilters={handleResetFilter} />
-      <SideBar
-        onSelectCategory={handleSelectedCategory}
-        selectedCategory={selectedCategory}
-        selectedPrice={selectedPrice}
-        onSelectPrice={handleSelectedPrice}
+    <div
+      className={
+        !selectedProduct
+          ? 'grid h-dvh grid-cols-[10rem_1fr] grid-rows-[auto_1fr]'
+          : ''
+      }
+    >
+      <Header
+        onResetFilters={handleResetFilter}
+        selectedProduct={selectedProduct}
       />
+      {!selectedProduct && (
+        <SideBar
+          onSelectCategory={handleSelectedCategory}
+          selectedCategory={selectedCategory}
+          selectedPrice={selectedPrice}
+          onSelectPrice={handleSelectedPrice}
+        />
+      )}
+
       <main className='overflow-scroll bg-slate-100 p-5'>
         <Outlet
           context={[
@@ -120,6 +131,8 @@ function AppLayout() {
             error,
             numProducts,
             currentPage,
+            selectedProduct,
+            setSelectedProduct,
           ]}
         />
       </main>

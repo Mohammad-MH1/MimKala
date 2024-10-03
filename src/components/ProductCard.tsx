@@ -1,3 +1,5 @@
+import { Link } from 'react-router-dom';
+
 type ProductCardProps = {
   product: {
     id: number;
@@ -20,18 +22,20 @@ type ProductCardProps = {
 function ProductCard({ product }: ProductCardProps) {
   return (
     <li className='overflow-hidden rounded-md bg-blue-100'>
-      <div>
-        <img src={product.images[0]} alt={product.title} />
-      </div>
-      <div className='px-5 pt-5 font-medium'>
-        <p>{product.title}</p>
-        <div className='mt-4 flex items-center justify-between'>
-          <p className='text-lg font-bold'>${product.price}</p>
-          <p className='rounded-full border-[0.6px] border-solid border-blue-950 px-2 py-1 text-sm uppercase'>
-            {product.category.name}
-          </p>
+      <Link to={`products/${product.id}`}>
+        <div>
+          <img src={product.images[0]} alt={product.title} />
         </div>
-      </div>
+        <div className='px-5 pt-5 font-medium'>
+          <p>{product.title}</p>
+          <div className='mt-4 flex items-center justify-between'>
+            <p className='text-lg font-bold'>${product.price}</p>
+            <p className='rounded-full border-[0.6px] border-solid border-blue-950 px-2 py-1 text-sm uppercase'>
+              {product.category.name}
+            </p>
+          </div>
+        </div>
+      </Link>
     </li>
   );
 }
