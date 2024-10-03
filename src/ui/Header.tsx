@@ -1,6 +1,10 @@
 import Button from './Button';
 
-function Header() {
+type HeaderProps = {
+  onResetFilters: () => void;
+};
+
+function Header({ onResetFilters }: HeaderProps) {
   return (
     <header className='col-span-2 flex h-20 items-center justify-between border-b-[0.5px] border-solid border-slate-200 px-20'>
       <h1 className='text-3xl uppercase tracking-wider'>MimKala</h1>
@@ -11,7 +15,7 @@ function Header() {
           placeholder='Search...'
         />
       </div>
-      <Button>Reset Filters</Button>
+      <Button onClick={onResetFilters}>Reset Filters</Button>
     </header>
   );
 }

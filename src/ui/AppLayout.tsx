@@ -90,9 +90,21 @@ function AppLayout() {
     });
   }
 
+  function handleResetFilter() {
+    setSelectedCategory('');
+    setSelectedPrice('');
+    setCurrentPage(0);
+    setFilters({
+      page: 1,
+      perPage: 10,
+      categoryID: '',
+      price: '',
+    });
+  }
+
   return (
     <div className='grid h-dvh grid-cols-[10rem_1fr] grid-rows-[auto_1fr]'>
-      <Header />
+      <Header onResetFilters={handleResetFilter} />
       <SideBar
         onSelectCategory={handleSelectedCategory}
         selectedCategory={selectedCategory}
