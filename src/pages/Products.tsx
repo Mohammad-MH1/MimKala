@@ -4,55 +4,18 @@ import { getProducts } from '../services/productsApi';
 import ReactPaginate from 'react-paginate';
 import Loader from '../ui/Loader';
 import ErrorMessage from '../ui/ErrorMessage';
+import { useOutletContext } from 'react-router-dom';
 
-type Product = {
-  id: number;
-  title: string;
-  price: number;
-  description: string;
-  images: string[];
-  creationAt: string;
-  updatedAt: string;
-  category: {
-    id: number;
-    name: string;
-    image: string;
-    creationAt: string;
-    updatedAt: string;
-  };
-};
 function Products() {
-  const [products, setProducts] = useState<Product[]>([]);
-  const [isLoading, setIsLoading] = useState(false);
-  const [error, setError] = useState('');
-  const [filters, setFilters] = useState({
-    page: 1,
-    perPage: 10,
-  });
-  console.log(products.length);
-
-  async function fetchProducts() {
-    try {
-      setIsLoading(true);
-      const data = await getProducts(filters);
-      setProducts(data);
-    } catch (err) {
-      if (err instanceof Error) setError(err.message);
-    } finally {
-      setIsLoading(false);
-    }
-  }
-
-  useEffect(
-    function () {
-      fetchProducts();
-    },
-    [filters],
-  );
-
-  function handlePageClick(data: { selected: number }) {
-    setFilters({ page: data.selected + 1, perPage: 10 });
-  }
+  const [
+    handlePageClick,
+    products,
+    isLoading,
+    error,
+    numProducts,
+    currentPage,
+  ] = useOutletContext();
+  const pageCount = Math.ceil(numProducts / 10);
 
   return (
     <section>
@@ -73,8 +36,9 @@ function Products() {
                 breakLabel='...'
                 nextLabel='next >'
                 pageRangeDisplayed={1}
-                pageCount={4}
+                pageCount={pageCount}
                 onPageChange={handlePageClick}
+                forcePage={currentPage}
                 previousLabel='< previous'
                 renderOnZeroPageCount={null}
                 className='flex items-center justify-center gap-10'
