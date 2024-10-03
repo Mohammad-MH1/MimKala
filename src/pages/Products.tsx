@@ -3,6 +3,7 @@ import ReactPaginate from 'react-paginate';
 import Loader from '../ui/Loader';
 import ErrorMessage from '../ui/ErrorMessage';
 import { useOutletContext } from 'react-router-dom';
+import ProductsHeader from '../components/ProductsHeader';
 
 function Products() {
   const [
@@ -18,6 +19,7 @@ function Products() {
 
   return (
     <section>
+      <ProductsHeader numProducts={numProducts} />
       {isLoading && <Loader />}
       {error ? (
         <ErrorMessage message={error} />
