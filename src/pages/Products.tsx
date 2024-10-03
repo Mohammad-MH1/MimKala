@@ -1,6 +1,4 @@
-import { useEffect, useState } from 'react';
 import ProductCard from '../components/ProductCard';
-import { getProducts } from '../services/productsApi';
 import ReactPaginate from 'react-paginate';
 import Loader from '../ui/Loader';
 import ErrorMessage from '../ui/ErrorMessage';
@@ -16,6 +14,7 @@ function Products() {
     currentPage,
   ] = useOutletContext();
   const pageCount = Math.ceil(numProducts / 10);
+  console.log(pageCount);
 
   return (
     <section>
@@ -24,30 +23,33 @@ function Products() {
         <ErrorMessage message={error} />
       ) : (
         <>
-          {' '}
-          <ul className='grid grid-cols-5 gap-x-4 gap-y-10'>
-            {products.map(product => (
-              <ProductCard product={product} key={product.id} />
-            ))}
-          </ul>
-          <div className='mt-14'>
-            {products.length > 0 && (
-              <ReactPaginate
-                breakLabel='...'
-                nextLabel='next >'
-                pageRangeDisplayed={1}
-                pageCount={pageCount}
-                onPageChange={handlePageClick}
-                forcePage={currentPage}
-                previousLabel='< previous'
-                renderOnZeroPageCount={null}
-                className='flex items-center justify-center gap-10'
-                nextLinkClassName='button focus:ring-0 focus:ring-offset-0'
-                previousLinkClassName='button focus:ring-0 focus:ring-offset-0'
-                activeClassName='button py-2 px-4'
-              />
-            )}
-          </div>
+          {products.length > 0 ? (
+            <>
+              <ul className='grid grid-cols-5 gap-x-4 gap-y-10'>
+                {products.map(product => (
+                  <ProductCard product={product} key={product.id} />
+                ))}
+              </ul>
+              <div className='mt-14'>
+                <ReactPaginate
+                  breakLabel='...'
+                  nextLabel='next >'
+                  pageRangeDisplayed={1}
+                  pageCount={pageCount}
+                  onPageChange={handlePageClick}
+                  forcePage={currentPage}
+                  previousLabel='< previous'
+                  renderOnZeroPageCount={null}
+                  className='flex items-center justify-center gap-10'
+                  nextLinkClassName='button focus:ring-0 focus:ring-offset-0'
+                  previousLinkClassName='button focus:ring-0 focus:ring-offset-0'
+                  activeClassName='button py-2 px-4'
+                />
+              </div>
+            </>
+          ) : (
+            <ErrorMessage message='No Products Found. Change Your Filters' />
+          )}
         </>
       )}
     </section>

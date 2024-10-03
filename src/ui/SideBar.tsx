@@ -1,9 +1,16 @@
 type SideBarProps = {
   onSelectCategory: (value: string) => void;
   selectedCategory: string;
+  onSelectPrice: (value: string) => void;
+  selectedPrice: string;
 };
 
-function SideBar({ onSelectCategory, selectedCategory }: SideBarProps) {
+function SideBar({
+  onSelectCategory,
+  selectedCategory,
+  onSelectPrice,
+  selectedPrice,
+}: SideBarProps) {
   return (
     <aside className='px-10 pt-3'>
       <h2 className='mb-10 text-lg'>Filters</h2>
@@ -23,12 +30,17 @@ function SideBar({ onSelectCategory, selectedCategory }: SideBarProps) {
       </div>
       <div>
         <h2 className='mb-2'>Price</h2>
-        <ul>
-          <li>All</li>
-          <li>$0-50</li>
-          <li>$50-100</li>
-          <li>over 100</li>
-        </ul>
+        <select
+          value={selectedPrice}
+          onChange={e => onSelectPrice(e.target.value)}
+        >
+          <option value=''>All</option>
+          <option value={1}>$0-$25</option>
+          <option value={2}>$25-$50</option>
+          <option value={3}>$50-$75</option>
+          <option value={4}>$75-$100</option>
+          <option value={5}>over $100</option>
+        </select>
       </div>
     </aside>
   );

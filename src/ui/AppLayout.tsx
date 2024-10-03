@@ -26,13 +26,17 @@ function AppLayout() {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState('');
   const [selectedCategory, setSelectedCategory] = useState('');
+  const [selectedPrice, setSelectedPrice] = useState('');
   const [numProducts, setNumProducts] = useState(0);
   const [currentPage, setCurrentPage] = useState(0);
   const [filters, setFilters] = useState({
     page: 1,
     perPage: 10,
     categoryID: '',
+    price: '',
   });
+
+  console.log(numProducts);
 
   async function fetchProducts() {
     try {
@@ -57,7 +61,23 @@ function AppLayout() {
   function handleSelectedCategory(value: string) {
     setSelectedCategory(value);
     setCurrentPage(0);
-    setFilters({ page: 1, perPage: 10, categoryID: value });
+    setFilters({
+      page: 1,
+      perPage: 10,
+      categoryID: value,
+      price: selectedPrice,
+    });
+  }
+
+  function handleSelectedPrice(value: string) {
+    setSelectedPrice(value);
+    setCurrentPage(0);
+    setFilters({
+      page: 1,
+      perPage: 10,
+      categoryID: selectedCategory,
+      price: value,
+    });
   }
 
   function handlePageClick(data: { selected: number }) {
@@ -66,6 +86,7 @@ function AppLayout() {
       page: data.selected + 1,
       perPage: 10,
       categoryID: selectedCategory,
+      price: selectedPrice,
     });
   }
 
@@ -75,6 +96,8 @@ function AppLayout() {
       <SideBar
         onSelectCategory={handleSelectedCategory}
         selectedCategory={selectedCategory}
+        selectedPrice={selectedPrice}
+        onSelectPrice={handleSelectedPrice}
       />
       <main className='overflow-scroll bg-slate-100 p-5'>
         <Outlet
