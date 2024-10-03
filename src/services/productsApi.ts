@@ -8,12 +8,13 @@ export async function getProducts(params?: {
 
   if (params) {
     if (params.page) parameters += `_page=${params.page}&`;
-    if (params.perPage) parameters += `_per_page=${params.perPage}&`;
+    if (params.perPage) parameters += `_limit=${params.perPage}&`;
   }
 
   const res = await fetch(`${API_URL}${parameters}`);
   if (!res.ok) throw Error('Failed getting Products');
-  const { data } = await res.json();
+
+  const data = await res.json();
 
   return data;
 }
