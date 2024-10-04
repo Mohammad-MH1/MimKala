@@ -33,7 +33,7 @@ export async function getProducts(params?: {
   return [data, total];
 }
 
-export async function getProduct(id: number) {
+export async function getProduct(id: string | undefined) {
   const res = await fetch(`${API_URL}/${id}`);
   if (!res.ok) throw Error('Failed getting Product');
   const data = await res.json();

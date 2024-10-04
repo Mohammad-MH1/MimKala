@@ -1,7 +1,8 @@
 import { Link, useOutletContext, useParams } from 'react-router-dom';
 import Loader from '../ui/Loader';
 import ErrorMessage from '../ui/ErrorMessage';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
+import { getProduct } from '../services/productsApi';
 
 function ProductDetail() {
   const [
@@ -14,18 +15,31 @@ function ProductDetail() {
     selectedProduct,
     setSelectedProduct,
   ] = useOutletContext();
+  const [isLoadingProduct, setIsLoadingProduct] = useState(false);
+  const [errorProduct, setErrorProduct] = useState('');
 
   const { id } = useParams();
+  async function fetchProduct() {
+    try {
+      setIsLoadingProduct(true);
+      const data = await getProduct(id);
+      setSelectedProduct(data);
+    } catch (err) {
+      if (err instanceof Error) setErrorProduct(err.message);
+    } finally {
+      setIsLoadingProduct(false);
+    }
+  }
 
   useEffect(
     function () {
-      setSelectedProduct(products?.find(product => product.id === Number(id)));
+      fetchProduct();
     },
-    [products, id, setSelectedProduct],
+    [id],
   );
 
-  if (isLoading) return <Loader />;
-  if (error) return <ErrorMessage message={error} />;
+  if (isLoadingProduct) return <Loader />;
+  if (errorProduct) return <ErrorMessage message={errorProduct} />;
   return (
     <>
       {selectedProduct && (
