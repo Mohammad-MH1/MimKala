@@ -28,7 +28,7 @@ function Products() {
         <>
           {products.length > 0 ? (
             <>
-              <ul className='grid grid-cols-1 place-items-center gap-y-4 sm:gap-5 md:grid-cols-2 md:place-items-stretch lg:grid-cols-3 lg:text-lg xl:grid-cols-4 2xl:grid-cols-5 2xl:gap-x-4 2xl:gap-y-10'>
+              <ul className='grid grid-cols-[1fr] place-items-center gap-y-4 sm:gap-5 md:grid-cols-2 md:place-items-stretch lg:grid-cols-3 lg:text-lg xl:grid-cols-4 2xl:grid-cols-5 2xl:gap-x-4 2xl:gap-y-10'>
                 {products.map(product => (
                   <ProductCard product={product} key={product.id} />
                 ))}
