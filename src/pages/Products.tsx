@@ -28,25 +28,25 @@ function Products() {
         <>
           {products.length > 0 ? (
             <>
-              <ul className='grid grid-cols-5 gap-x-4 gap-y-10'>
+              <ul className='grid grid-cols-1 place-items-center gap-y-4 sm:gap-5 md:grid-cols-2 md:place-items-stretch lg:grid-cols-3 lg:text-lg xl:grid-cols-4 2xl:grid-cols-5 2xl:gap-x-4 2xl:gap-y-10'>
                 {products.map(product => (
                   <ProductCard product={product} key={product.id} />
                 ))}
               </ul>
-              <div className='mt-14'>
+              <div className='mb-5 mt-10'>
                 <ReactPaginate
                   breakLabel='...'
                   nextLabel='next >'
-                  pageRangeDisplayed={1}
+                  pageRangeDisplayed={3}
                   pageCount={pageCount}
                   onPageChange={handlePageClick}
                   forcePage={currentPage}
                   previousLabel='< previous'
                   renderOnZeroPageCount={null}
-                  className='flex items-center justify-center gap-10'
-                  nextLinkClassName='button focus:ring-0 focus:ring-offset-0'
+                  className='flex items-center justify-center gap-6 sm:gap-4 md:gap-8 lg:gap-10'
+                  nextLinkClassName='button focus:ring-0 focus:ring-offset-0 '
                   previousLinkClassName='button focus:ring-0 focus:ring-offset-0'
-                  activeClassName='button py-2 px-4'
+                  activeClassName='button py-1 px-2 sm:py-1 sm:px-3 lg:px-4 lg:py-2'
                 />
               </div>
             </>

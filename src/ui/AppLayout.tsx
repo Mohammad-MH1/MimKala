@@ -105,7 +105,7 @@ function AppLayout() {
     <div
       className={
         !selectedProduct
-          ? 'grid h-dvh grid-cols-[10rem_1fr] grid-rows-[auto_1fr]'
+          ? 'grid h-dvh grid-cols-[1fr] grid-rows-[auto_1fr] sm:grid-cols-[8rem_1fr] lg:grid-cols-[10rem_1fr]'
           : ''
       }
     >
@@ -122,7 +122,7 @@ function AppLayout() {
         />
       )}
 
-      <main className='overflow-scroll bg-slate-100 p-5'>
+      <main className='overflow-scroll bg-slate-100 px-2 sm:p-5'>
         <Outlet
           context={[
             handlePageClick,

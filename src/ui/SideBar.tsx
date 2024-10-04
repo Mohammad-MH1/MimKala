@@ -12,8 +12,10 @@ function SideBar({
   selectedPrice,
 }: SideBarProps) {
   return (
-    <aside className='px-10 pt-3'>
-      <h2 className='mb-10 text-lg'>Filters</h2>
+    <aside className='hidden sm:block border-r-[0.5px] border-solid border-slate-200 px-10 pt-3 sm:px-4'>
+      <h2 className='mb-5 border-b-4 border-solid border-blue-300 text-2xl'>
+        Filters
+      </h2>
       <div className='mb-10'>
         <h2 className='mb-2'>Category</h2>
         <select
