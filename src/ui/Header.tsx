@@ -1,12 +1,12 @@
 import { IoClose, IoMenu } from 'react-icons/io5';
 import { Product } from './AppLayout';
 import Button from './Button';
-import { useState } from 'react';
+import { FormEvent, useState } from 'react';
 
 type HeaderProps = {
   onResetFilters: () => void;
   onQuery: (value: string) => void;
-  onSearchSubmit: () => void;
+  onSearchSubmit: (e: FormEvent<Element>) => void;
   selectedProduct: Product | null;
   query: string;
 };
