@@ -149,7 +149,7 @@ function AppLayout() {
 
       <main className='overflow-scroll bg-slate-100 px-2 sm:p-5'>
         <Outlet
-          context={[
+          context={{
             handlePageClick,
             products,
             isLoading,
@@ -158,7 +158,7 @@ function AppLayout() {
             currentPage,
             selectedProduct,
             setSelectedProduct,
-          ]}
+          }}
         />
       </main>
     </div>

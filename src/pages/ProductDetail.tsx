@@ -3,18 +3,19 @@ import Loader from '../ui/Loader';
 import ErrorMessage from '../ui/ErrorMessage';
 import { useEffect, useState } from 'react';
 import { getProduct } from '../services/productsApi';
+import { Product } from '../ui/AppLayout';
 
 function ProductDetail() {
-  const [
-    handlePageClick,
-    products,
-    isLoading,
-    error,
-    numProducts,
-    currentPage,
-    selectedProduct,
-    setSelectedProduct,
-  ] = useOutletContext();
+  const { selectedProduct, setSelectedProduct } = useOutletContext<{
+    handlePageClick: (data: { selected: number }) => void;
+    products: Product[];
+    isLoading: boolean;
+    error: string;
+    numProducts: number;
+    currentPage: number;
+    selectedProduct: Product | null;
+    setSelectedProduct: React.Dispatch<React.SetStateAction<Product | null>>;
+  }>();
   const [isLoadingProduct, setIsLoadingProduct] = useState(false);
   const [errorProduct, setErrorProduct] = useState('');
 

@@ -4,18 +4,26 @@ import Loader from '../ui/Loader';
 import ErrorMessage from '../ui/ErrorMessage';
 import { useOutletContext } from 'react-router-dom';
 import ProductsHeader from '../components/ProductsHeader';
+import { Product } from '../ui/AppLayout';
 
 function Products() {
-  const [
+  const {
     handlePageClick,
     products,
     isLoading,
     error,
     numProducts,
     currentPage,
-    selectedProduct,
-    setSelectedProduct,
-  ] = useOutletContext();
+  } = useOutletContext<{
+    handlePageClick: (data: { selected: number }) => void;
+    products: Product[];
+    isLoading: boolean;
+    error: string;
+    numProducts: number;
+    currentPage: number;
+    selectedProduct: Product | null;
+    setSelectedProduct: React.Dispatch<React.SetStateAction<Product | null>>;
+  }>();
   const pageCount = Math.ceil(numProducts / 10);
 
   return (
