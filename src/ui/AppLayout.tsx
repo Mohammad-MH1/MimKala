@@ -1,7 +1,7 @@
 import { Outlet } from 'react-router-dom';
 import Header from './Header';
 import SideBar from './SideBar';
-import { useEffect, useState } from 'react';
+import { FormEvent, useEffect, useState } from 'react';
 import { getProducts } from '../services/productsApi';
 
 export type Product = {
@@ -30,11 +30,13 @@ function AppLayout() {
   const [selectedPrice, setSelectedPrice] = useState('');
   const [numProducts, setNumProducts] = useState(0);
   const [currentPage, setCurrentPage] = useState(0);
+  const [query, setQuery] = useState('');
   const [filters, setFilters] = useState({
     page: 1,
     perPage: 10,
     categoryID: '',
     price: '',
+    query: '',
   });
 
   async function fetchProducts() {
@@ -65,6 +67,7 @@ function AppLayout() {
       perPage: 10,
       categoryID: value,
       price: selectedPrice,
+      query,
     });
   }
 
@@ -76,6 +79,7 @@ function AppLayout() {
       perPage: 10,
       categoryID: selectedCategory,
       price: value,
+      query,
     });
   }
 
@@ -86,6 +90,23 @@ function AppLayout() {
       perPage: 10,
       categoryID: selectedCategory,
       price: selectedPrice,
+      query,
+    });
+  }
+
+  function handleQuery(value: string) {
+    setQuery(value);
+  }
+
+  function handleSearchSubmit(e: FormEvent) {
+    e.preventDefault();
+    setCurrentPage(0);
+    setFilters({
+      page: 1,
+      perPage: 10,
+      categoryID: selectedCategory,
+      price: selectedPrice,
+      query,
     });
   }
 
@@ -98,6 +119,7 @@ function AppLayout() {
       perPage: 10,
       categoryID: '',
       price: '',
+      query: '',
     });
   }
 
@@ -112,6 +134,9 @@ function AppLayout() {
       <Header
         onResetFilters={handleResetFilter}
         selectedProduct={selectedProduct}
+        onQuery={handleQuery}
+        query={query}
+        onSearchSubmit={handleSearchSubmit}
       />
       {!selectedProduct && (
         <SideBar
