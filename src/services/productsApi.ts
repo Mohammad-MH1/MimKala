@@ -1,4 +1,5 @@
-const API_URL = 'http://localhost:8000/products';
+// const API_URL = 'http://localhost:8000/products';
+const API_URL = 'https://four-gaudy-passenger.glitch.me/products';
 
 export async function getProducts(params?: {
   page?: number;
